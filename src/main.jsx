@@ -1,23 +1,29 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import App from "./App.jsx";
+
 import "./index.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import AddCoffee from "./Components/AddCoffee.jsx";
 import UpdateCoffee from "./Components/UpdateCoffee.jsx";
 import Errorpage from "./Components/ErrorPage/Errorpage.jsx";
+import Home from "./Home";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <App>Hello world!</App>,
+    element: <Home></Home>,
+    loader:()=>fetch('http://localhost:5000/coffee'),
+    
   },
+  
   {
-    path:'addCoffee',
+    path:'/addCoffee',
     element:<AddCoffee></AddCoffee>
   },{
-    path:'updateCoffee',
-    element:<UpdateCoffee></UpdateCoffee>
+    path:'/updateCoffee/:id',
+    element:<UpdateCoffee></UpdateCoffee>,
+    loader:({params})=>fetch(`http://localhost:5000/coffee/${params.id}`)
+    
   },{
     path:'error',
     element:<Errorpage></Errorpage>
