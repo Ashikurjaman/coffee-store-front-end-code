@@ -7,6 +7,10 @@ import AddCoffee from "./Components/AddCoffee.jsx";
 import UpdateCoffee from "./Components/UpdateCoffee.jsx";
 import Errorpage from "./Components/ErrorPage/Errorpage.jsx";
 import Home from "./Home";
+import Login from "./Login";
+import SignUp from "./SignUp";
+import AuthContext from "./Context/AuthContext";
+
 
 const router = createBrowserRouter([
   {
@@ -27,11 +31,21 @@ const router = createBrowserRouter([
   },{
     path:'error',
     element:<Errorpage></Errorpage>
+  },{
+    path:'/signup',
+    element:<SignUp></SignUp>
+  },{
+    path:'/login',
+    element:<Login></Login>
   }
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-     <RouterProvider router={router} />
+    <AuthContext>
+
+    <RouterProvider router={router} />
+    </AuthContext>
+     
   </React.StrictMode>
 );
